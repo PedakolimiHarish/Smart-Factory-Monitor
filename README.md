@@ -16,8 +16,8 @@ The dashboard also checks these values and shows a warning when they go outside 
 ## What is used
 
 - Python
-- Mosquitto MQTT
 - MQTT
+- Eclipse Mosquitto (MQTT Broker)
 - Streamlit
 - Pandas
 
@@ -189,7 +189,7 @@ switch.
 
 Turn it on.
 
-The machine will restart with abnormal values:
+The machine will generate abnormal values::
 
 | Parameter | Fault range |
 |---|---:|
@@ -255,17 +255,17 @@ Make sure Mosquitto is running before starting them.
 
 For the project presentation, the easiest demonstration is:
 
-1. Run `python demo.py`.
-2. Click **START DEMO**.
-3. Show the normal sensor values.
-4. Show the live graphs.
-5. Show the machine health score.
-6. Turn on **Simulate Machine Fault**.
-7. Show the abnormal values.
-8. Show the anomaly warning on the dashboard.
-9. Show the health score changing.
-10. Turn fault mode off and return to normal operation.
-
+1. Make sure Mosquitto MQTT broker is installed and running.
+2. Create and activate the Python virtual environment.
+3. Install the required Python packages using `requirements.txt`.
+4. Run `python demo.py`.
+5. Click **START DEMO**.
+6. Show the normal machine sensor values.
+7. Show the live historical graphs.
+8. Turn on **Simulate Machine Fault**.
+9. Show the abnormal temperature, vibration, RPM, and current values.
+10. Show the anomaly warning and the detected fault reasons on the dashboard.
+11. Turn fault mode off and show the machine returning to normal operation.
 ## Troubleshooting
 
 ### Mosquitto is not running
