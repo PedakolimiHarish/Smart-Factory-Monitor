@@ -51,22 +51,6 @@ Example:
 }
 ```
 
-## Project files
-
-```text
-smart_factory/
-│
-├── simulator/
-│   └── machine.py
-│
-├── dashboard/
-│   └── app.py
-│
-├── demo.py
-├── requirements.txt
-└── README.md
-```
-
 `.venv` is created locally when you set up the project, so it does not need to be included in the project files.
 
 ## Requirements
@@ -224,24 +208,6 @@ It will also show which parameters are outside the normal range.
 
 Turn the switch off to return to normal operation.
 
-## Machine health
-
-The dashboard has a simple health score.
-
-It starts at 100%.
-
-Every abnormal parameter reduces the score by 25 points.
-
-```text
-0 abnormal values → 100%
-1 abnormal value  → 75%
-2 abnormal values → 50%
-3 abnormal values → 25%
-4 abnormal values → 0%
-```
-
-This is only a simple project metric for demonstrating machine condition.
-
 ## MQTT
 
 The machine publishes its data to:
@@ -284,19 +250,6 @@ http://localhost:8501
 
 Make sure Mosquitto is running before starting them.
 
-## What the project demonstrates
-
-This project covers a few basic Industry 4.0 ideas:
-
-- Industrial IoT
-- Machine connectivity
-- MQTT communication
-- Real-time monitoring
-- Sensor data visualization
-- Condition monitoring
-- Basic anomaly detection
-
-The project uses simulated sensor data, so no physical machine or sensors are required.
 
 ## Demo flow
 

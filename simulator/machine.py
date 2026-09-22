@@ -5,41 +5,21 @@ import json
 
 import paho.mqtt.client as mqtt
 
-
-# -----------------------------
-# MQTT configuration
-# -----------------------------
-
 MQTT_BROKER = "localhost"
 MQTT_PORT = 1883
 MACHINE_ID = "machine1"
-
 MQTT_TOPIC = f"factory/{MACHINE_ID}/data"
-
-
-# -----------------------------
-# Machine configuration
-# -----------------------------
-
 
 FAULT_MODE = os.getenv("FAULT_MODE", "false").lower() == "true"
 
+client = mqtt.Client(callback_api_version=mqtt.CallbackAPIVersion.VERSION2)
 
+client.connect( MQTT_BROKER, MQTT_PORT, 60)
+
+# ----------------------------- 
+# Debug information
 # -----------------------------
-# MQTT client
-# -----------------------------
-
-client = mqtt.Client(
-    callback_api_version=mqtt.CallbackAPIVersion.VERSION2
-)
-
-client.connect(
-    MQTT_BROKER,
-    MQTT_PORT,
-    60
-)
-
-print("Connected to MQTT broker")
+""" print("Connected to MQTT broker")
 print(f"Machine ID: {MACHINE_ID}")
 
 if FAULT_MODE:
@@ -48,34 +28,26 @@ else:
     print("🟢 NORMAL MODE")
 
 print()
-
-
-# -----------------------------
-# Generate machine data
-# -----------------------------
+ """
 
 def generate_machine_data():
 
     if FAULT_MODE:
 
         # Abnormal machine condition
-
         temperature = random.uniform(80, 95)
         vibration = random.uniform(6, 9)
         rpm = random.uniform(1100, 1250)
         current = random.uniform(6, 8)
-
         status = "FAULT"
 
     else:
 
         # Normal machine condition
-
         temperature = random.uniform(55, 65)
         vibration = random.uniform(1.5, 3.0)
         rpm = random.uniform(1400, 1500)
         current = random.uniform(4.0, 5.0)
-
         status = "RUNNING"
 
     return {
@@ -86,26 +58,17 @@ def generate_machine_data():
         "status": status
     }
 
-
-# -----------------------------
-# Main simulation loop
-# -----------------------------
-
 while True:
 
     data = generate_machine_data()
+    client.publish( MQTT_TOPIC, json.dumps(data))
 
-    client.publish(
-        MQTT_TOPIC,
-        json.dumps(data)
-    )
-
-    print(
+    """ print(
         f"Temperature: {data['temperature']} °C | "
         f"Vibration: {data['vibration']} mm/s | "
         f"RPM: {data['rpm']:.0f} | "
         f"Current: {data['current']} A | "
         f"Status: {data['status']}"
-    )
+    ) """
 
     time.sleep(1)
